@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-package main
+package list
 
 import (
-	"collections/list/arraylist"
-	"fmt"
+	"collections/collection"
 )
 
-func main() {
-	arrayList := arraylist.New("Kaan", "Hello", "World")
-	fmt.Println(arrayList.Size())
-	arrayList.Add()
+type List[T any] interface {
+	collection.Collection[T]
+	Get(index int) (T, error)
+	IndexOf(element T) (int, error)
+	SubList(startIndex, endIndex int) (List[T], error)
 }

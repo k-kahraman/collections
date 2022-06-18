@@ -22,15 +22,12 @@
  * SOFTWARE.
  */
 
-package main
+package list
 
-import (
-	"collections/list/arraylist"
-	"fmt"
-)
+import "fmt"
 
-func main() {
-	arrayList := arraylist.New("Kaan", "Hello", "World")
-	fmt.Println(arrayList.Size())
-	arrayList.Add()
+type Error string
+
+func (err Error) Error() string {
+	return fmt.Sprintf("Error! Cause: %v", err)
 }

@@ -22,15 +22,9 @@
  * SOFTWARE.
  */
 
-package main
+package iterable
 
-import (
-	"collections/list/arraylist"
-	"fmt"
-)
-
-func main() {
-	arrayList := arraylist.New("Kaan", "Hello", "World")
-	fmt.Println(arrayList.Size())
-	arrayList.Add()
+type Iterable[T any] interface {
+	ForEach(action func())
+	GetIterator() Iterator[T]
 }

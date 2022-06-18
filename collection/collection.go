@@ -22,15 +22,19 @@
  * SOFTWARE.
  */
 
-package main
+package collection
 
-import (
-	"collections/list/arraylist"
-	"fmt"
-)
+import "collections/iterable"
 
-func main() {
-	arrayList := arraylist.New("Kaan", "Hello", "World")
-	fmt.Println(arrayList.Size())
-	arrayList.Add()
+// Collection is the base interface where all collection will implement
+type Collection[T any] interface {
+	iterable.Iterable[T]
+	Add(element T) bool
+	AddAll(elements []T) bool
+	Contains(element T) bool
+	ContainsAll(collection Collection[T]) bool
+	IsEmpty() bool
+	Size() uint
+	Clear() bool
+	Values() []T
 }
