@@ -29,12 +29,12 @@ import "collections/iterable"
 // Collection is the base interface where all collection will implement
 type Collection[T any] interface {
 	iterable.Iterable[T]
-	Add(element T) bool
-	AddAll(elements []T) bool
+	Add(elements ...T)
+	Get() (T, error)
+	Size() int
 	Contains(element T) bool
 	ContainsAll(collection Collection[T]) bool
 	IsEmpty() bool
-	Size() uint
 	Clear() bool
 	Values() []T
 }

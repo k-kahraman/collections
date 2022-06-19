@@ -26,5 +26,4 @@ package iterable
 
 type Iterable[T any] interface {
 	ForEach(action func())
-	GetIterator() Iterator[T]
 }
