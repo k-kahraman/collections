@@ -30,7 +30,15 @@ import (
 )
 
 func main() {
-	arrayList := arraylist.New("Kaan", "Hello", "World")
+	arrayList := arraylist.New(2, 3, 4)
 	fmt.Println(arrayList.Size())
-	arrayList.Add()
+	arrayList.ForEachRefer(sumByTwo)
+
+	for _, val := range arrayList.Values() {
+		fmt.Println(val)
+	}
+}
+
+func sumByTwo(x *int) {
+	*x += 2
 }

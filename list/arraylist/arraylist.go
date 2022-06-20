@@ -77,7 +77,8 @@ func (list *ArrayList[T]) Add(elements ...T) {
 func (list *ArrayList[T]) Get(index int) (T, error) {
 	absIndex, err := absoluteIndex(index, list.length)
 	if err != nil {
-		return nil, err
+		var zeroValue T // To return type specific zero value
+		return zeroValue, err
 	}
 	return list.elements[absIndex], nil
 }
@@ -120,10 +121,15 @@ func (list *ArrayList[T]) Values() []T {
 	return list.elements
 }
 
-func (list *ArrayList[T]) ForEach(action func(v T)) {
-	// TODO implement closures here!
+func (list *ArrayList[T]) ForEachValue(action func(v T)) {
 	for _, val := range list.elements {
 		action(val)
+	}
+}
+
+func (list *ArrayList[T]) ForEachRefer(action func(p *T)) {
+	for _, val := range list.elements {
+		action(&val)
 	}
 }
 

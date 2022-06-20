@@ -25,5 +25,6 @@
 package iterable
 
 type Iterable[T any] interface {
-	ForEach(action func())
+	ForEachValue(action func(v T))
+	ForEachRefer(action func(p *T))
 }
