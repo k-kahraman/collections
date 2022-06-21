@@ -30,6 +30,7 @@ import (
 
 type List[T any] interface {
 	collection.Collection[T]
+	InsertAt(element T, index int)
 	IndexOf(element T) (int, error)
 	SubList(startIndex, endIndex int) (List[T], error)
 }

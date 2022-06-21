@@ -74,6 +74,17 @@ func (list *ArrayList[T]) Add(elements ...T) {
 	}
 }
 
+func (list *ArrayList[T]) InsertAt(element T, index int) error {
+	absIndex, err := absoluteIndex(index, list.length)
+	if err != nil {
+		return err
+	}
+
+	list.elements[absIndex] = element
+
+	return nil
+}
+
 func (list *ArrayList[T]) Get(index int) (T, error) {
 	absIndex, err := absoluteIndex(index, list.length)
 	if err != nil {
@@ -91,6 +102,7 @@ func (list *ArrayList[T]) Size() int {
 // This can be improved in the future using an auxiliary array.
 func (list *ArrayList[T]) IndexOf(element T) int {
 	// TODO implement this with along side of Comparator
+
 	return -1
 }
 
@@ -119,18 +131,6 @@ func (list *ArrayList[T]) ContainsAll(compList list.List[T]) bool {
 
 func (list *ArrayList[T]) Values() []T {
 	return list.elements
-}
-
-func (list *ArrayList[T]) ForEachValue(action func(v T)) {
-	for _, val := range list.elements {
-		action(val)
-	}
-}
-
-func (list *ArrayList[T]) ForEachRefer(action func(p *T)) {
-	for _, val := range list.elements {
-		action(&val)
-	}
 }
 
 func New[T any](elements ...T) *ArrayList[T] {
