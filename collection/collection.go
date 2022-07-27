@@ -24,17 +24,14 @@
 
 package collection
 
-import "collections/iterable"
-
 // Collection is the base interface where all collection will implement
 type Collection[T any] interface {
-	iterable.Iterable[T]
-	Add(element T) bool
-	AddAll(elements []T) bool
-	Contains(element T) bool
+	Add(element ...T)
+	Get(index int) (T, error)
+	Size() int
+	Contains(T) bool
 	ContainsAll(collection Collection[T]) bool
 	IsEmpty() bool
-	Size() uint
 	Clear() bool
 	Values() []T
 }
