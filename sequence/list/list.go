@@ -24,19 +24,22 @@
 
 package list
 
-import "fmt"
+import (
+	"collections/sequence"
+	"fmt"
+)
 
 type Node[T any] struct {
 	value T
 	next  *Node[T]
 }
 
-type SinglyList[T any] struct {
+type List[T any] struct {
 	head   *Node[T]
 	length uint
 }
 
-func (list *SinglyList[T]) Append(element T) {
+func (list *List[T]) Append(element T) {
 	if list.head == nil {
 		list.head = &Node[T]{
 			value: element,
@@ -59,18 +62,25 @@ func (list *SinglyList[T]) Append(element T) {
 	}
 }
 
-// InsertAt How should this behave? insert empty nodes until the given index,
-// or if given index is longer than the length of linked list return?
-func (list *SinglyList[T]) InsertAt(index uint, element T) error {
+func (list *List[T]) InsertAt(index uint, element T) error {
 	if list.length >= index {
-		return Error("Index out of boundaries")
+		return sequence.Error("Index out of boundaries")
 	}
-	// TODO implement this lmao
+
+	node := list.head
+	for counter := uint(0); counter <= index; counter++ {
+		node = node.next
+	}
+
+	node = &Node[T]{
+		value: element,
+		next:  node.next,
+	}
 
 	return nil
 }
 
-func (list *SinglyList[T]) PrintList() {
+func (list *List[T]) PrintList() {
 	head := list.head
 
 	for head != nil {
@@ -79,6 +89,6 @@ func (list *SinglyList[T]) PrintList() {
 	}
 }
 
-func InitSingly[T any]() SinglyList[T] {
-	return SinglyList[T]{}
+func New[T any](elements ...T) *List[T] {
+	return &List[T]{}
 }

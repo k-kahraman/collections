@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package list
+package sequence
 
 import "fmt"
 

@@ -25,12 +25,25 @@
 package main
 
 import (
-	"collections/list/arraylist"
+	"collections/sequence/arraylist"
+	"collections/sequence/list"
 	"fmt"
 )
 
 func main() {
-	arrayList := arraylist.New("Kaan", "Hello", "World")
+	arrayList := arraylist.New(1, 2, 3, 4, 5)
+	list := list.
+
+	err := arrayList.Remove(4)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
 	fmt.Println(arrayList.Size())
-	arrayList.Add()
+
+	for index := 0; index < arrayList.Size(); index++ {
+		elem, _ := arrayList.Get(index)
+		fmt.Println(elem)
+	}
+
+	fmt.Println(arrayList.Get(9))
 }

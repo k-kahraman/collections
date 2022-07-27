@@ -24,20 +24,20 @@
 
 package arraylist
 
-import "collections/list"
+import "collections/sequence"
 
 const (
-	// GrowthCoefficient Determines how much the array list will grow,
+	// GrowthCoefficient Determines how much the array sequence will grow,
 	// giving a smaller coefficient is better for space complexity but the trade-off is time complexity,
 	// because array will grow more frequently as more data added
 	GrowthCoefficient = 2.0
 
-	// ShrinkCoefficient Determines how much the array list will shrink
+	// ShrinkCoefficient Determines how much the array sequence will shrink
 	ShrinkCoefficient = 0.25
 )
 
 type List[T any] struct {
-	list.List[T]
+	sequence.Sequence[T]
 	elements []T
 	length   int
 }
@@ -78,6 +78,25 @@ func (list *List[T]) Get(index int) (T, error) {
 
 func (list *List[T]) Size() int {
 	return list.length
+}
+
+func (list *List[T]) Remove(index int) error {
+	// Left shift according to index
+	if index >= list.length {
+		return sequence.Error("Index out of boundaries for removal!")
+	}
+
+	leftIndex := index
+	rightIndex := index + 1
+	for rightIndex < list.length {
+		list.elements[leftIndex] = list.elements[rightIndex]
+		leftIndex++
+		rightIndex++
+	}
+
+	list.length--
+
+	return nil
 }
 
 func New[T any](elements ...T) *List[T] {
