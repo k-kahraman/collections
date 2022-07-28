@@ -24,7 +24,10 @@
 
 package arraylist
 
-import "collections/sequence"
+import (
+	"collections/collection"
+	"collections/sequence"
+)
 
 const (
 	// GrowthCoefficient Determines how much the array sequence will grow,
@@ -37,9 +40,29 @@ const (
 )
 
 type List[T any] struct {
-	sequence.Sequence[T]
 	elements []T
 	length   int
+}
+
+// Contains Binary search. Can be optimized with sorting first and then looking with binary search
+func (list *List[T]) Contains(t T) bool {
+	// TODO implement custom comparable
+	panic("Implementation awaits!")
+}
+
+func (list *List[T]) ContainsAll(collection collection.Collection[T]) bool {
+	// TODO implement custom comparable
+	panic("implement me")
+}
+
+func (list *List[T]) IndexOf(element T) (int, error) {
+	// TODO implement custom comparable
+	panic("implement me")
+}
+
+func (list *List[T]) SubList(startIndex, endIndex int) (sequence.Sequence[T], error) {
+	// TODO implement custom comparable
+	panic("implement me")
 }
 
 func (list *List[T]) grow(exceededSize int) {
@@ -86,6 +109,7 @@ func (list *List[T]) Remove(index int) error {
 		return sequence.Error("Index out of boundaries for removal!")
 	}
 
+	// Left shift the whole array
 	leftIndex := index
 	rightIndex := index + 1
 	for rightIndex < list.length {
@@ -99,8 +123,33 @@ func (list *List[T]) Remove(index int) error {
 	return nil
 }
 
+func (list *List[T]) IsEmpty() bool {
+	return list.length == 0
+}
+
+func (list *List[T]) Clear() {
+	list.length = 0
+	list.elements = make([]T, 0)
+}
+
+func (list *List[T]) Values() []T {
+	return list.elements
+}
+
+func (list *List[T]) InsertAt(element T, index int) error {
+	if index > list.length {
+		return sequence.Error("Index out of boundaries!")
+	}
+
+	list.elements[index] = element
+
+	return nil
+}
+
 func New[T any](elements ...T) *List[T] {
-	arrayList := &List[T]{}
+	arrayList := &List[T]{
+		length: 0,
+	}
 
 	if len(elements) > 0 {
 		arrayList.Add(elements...)

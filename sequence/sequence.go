@@ -30,7 +30,7 @@ import (
 
 type Sequence[T any] interface {
 	collection.Collection[T]
-	InsertAt(element T, index int)
+	InsertAt(element T, index int) error
 	IndexOf(element T) (int, error)
 	SubList(startIndex, endIndex int) (Sequence[T], error)
 	Remove(index int) error

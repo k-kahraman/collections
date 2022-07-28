@@ -26,7 +26,6 @@ package list
 
 import (
 	"collections/sequence"
-	"fmt"
 )
 
 type Node[T any] struct {
@@ -39,7 +38,7 @@ type List[T any] struct {
 	length uint
 }
 
-func (list *List[T]) Append(element T) {
+func (list *List[T]) Add(element T) {
 	if list.head == nil {
 		list.head = &Node[T]{
 			value: element,
@@ -78,15 +77,6 @@ func (list *List[T]) InsertAt(index uint, element T) error {
 	}
 
 	return nil
-}
-
-func (list *List[T]) PrintList() {
-	head := list.head
-
-	for head != nil {
-		fmt.Println(head.value)
-		head = head.next
-	}
 }
 
 func New[T any](elements ...T) *List[T] {
