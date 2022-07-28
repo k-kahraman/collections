@@ -32,6 +32,6 @@ type Collection[T any] interface {
 	Contains(T) bool
 	ContainsAll(collection Collection[T]) bool
 	IsEmpty() bool
-	Clear() bool
+	Clear()
 	Values() []T
 }
