@@ -25,25 +25,31 @@
 package main
 
 import (
-	"collections/sequence/arraylist"
-	"collections/sequence/list"
+	"collections/linear/stack"
+	"collections/linear/vector"
 	"fmt"
 )
 
 func main() {
-	arrayList := arraylist.New(1, 2, 3, 4, 5)
-	list := list.
+	vec := vector.New(10, 20, 30)
+	stck := stack.New(-1)
 
-	err := arrayList.Remove(4)
-	if err != nil {
-		fmt.Println(err.Error())
-	}
-	fmt.Println(arrayList.Size())
-
-	for index := 0; index < arrayList.Size(); index++ {
-		elem, _ := arrayList.Get(index)
-		fmt.Println(elem)
+	for num := 0; num < 100; num++ {
+		stck.Push(num)
 	}
 
-	fmt.Println(arrayList.Get(9))
+	for index := 0; index < 3; index++ {
+		elem, _ := vec.Get(index)
+		fmt.Printf("Vector element at index %d is %d\n", index, elem)
+	}
+
+	for num := 0; num < 102; num++ {
+		stckElem, err := stck.Pop()
+		if err != nil {
+			fmt.Println(err)
+			break
+		}
+		fmt.Printf("Stack element at top is %d\n", stckElem)
+	}
+
 }

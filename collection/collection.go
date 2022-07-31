@@ -26,8 +26,6 @@ package collection
 
 // Collection is the base interface where all collection will implement
 type Collection[T comparable] interface {
-	Add(elements ...T)
-	Get(index int) (T, error)
 	Size() int
 	Contains(T) bool
 	ContainsAll(collection Collection[T]) bool
